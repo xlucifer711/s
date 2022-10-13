@@ -22,10 +22,10 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         if query.startswith("المطور") and event.query.user_id == bot.uid:
             buttons = [
                 [
-                    Button.url("المطورة كرستين", "https://t.me/dr_criss\n"),
-                    Button.url("المطور زين 👨🏼‍💻", "https://t.me/wjj_u\n"),
-                    Button.url("المطور بارلو", "https://t.me/bar_lo0o0\n"),
-                    Button.url("المطور عمرو 👨🏼‍💻", "https://t.me/cr_amr_sabry"),
+                    Button.url("كرستين", "https://t.me/dr_criss"),
+                    Button.url("زين 👨🏼‍💻", "https://t.me/wjj_u"),
+                    Button.url("بارلو", "https://t.me/bar_lo0o0"),
+                    Button.url("عمرو 👨🏼‍💻", "https://t.me/cr_amr_sabry"),
                     
                 ]
             ]
