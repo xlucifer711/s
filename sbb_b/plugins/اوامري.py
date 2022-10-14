@@ -40,13 +40,26 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                     Button.inline(" الفارات", data="VARJMTHON"),
                 ],
             ]
-            result = builder.article(
-                title="sbb_b",
-                text=ROE,
-                buttons=buttons,
-                link_preview=False,
-            )
-        await event.answer([result] if result else None)
+            if sbb_b_IC and sbb_b_IC.endswith((".jpg", ".png", "gif", "mp4")):
+                result = builder.photo(
+                    sbb_b_IC, text=ROE, buttons=buttons, link_preview=False
+                )
+            elif sbb_b_IC:
+                result = builder.document(
+                    sbb_b_IC,
+                    title="sbb_b",
+                    text=ROE,
+                    buttons=buttons,
+                    link_preview=False,
+                )
+            else:
+                result = builder.article(
+                    title="sbb_b",
+                    text=ROE,
+                    buttons=buttons,
+                    link_preview=False,
+                )
+            await event.answer([result] if result else None)
 
 
 @sbb_b.ar_cmd(pattern="اوامري")
