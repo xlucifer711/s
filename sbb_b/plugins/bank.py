@@ -9,10 +9,10 @@ from telethon import functions, types
 from telethon.errors.rpcerrorlist import UserNotParticipantError, YouBlockedUserError
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from userbot import catub
-from userbot.core.managers import edit_delete, edit_or_reply
-from userbot.helpers import media_type, unsavegif
-from userbot.helpers.utils import reply_id
+from sbb_b import sbb_b 
+from .core.managers import edit_delete, edit_or_reply
+from .helpers import media_type, unsavegif
+from .helpers.utils import reply_id
 
 plugin_category = "useless"
 
