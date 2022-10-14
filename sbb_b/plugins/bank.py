@@ -1,18 +1,8 @@
 import asyncio
-import random
-import re
-import time
-from random import choice, randint
-from collections import deque
-from telethon import events
-import requests
 
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
-
-
-from sbb_b import CMD_HELP
-from sbb_b.utils import admin_cmd
+from sbb_b import sbb_b 
+from .core.managers import edit_or_reply
+from .plugins import mention
 
 plugin_category = "fun"
 
