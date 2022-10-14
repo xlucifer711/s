@@ -17,8 +17,6 @@ from sbb_b import sbb_b
 
 plugin_category = "useless"
 
-LOGS = logging.getLogger(__name__)
-
 
 @sbb_b.ar_cmd(
     pattern="dis$",
