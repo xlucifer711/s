@@ -1,18 +1,14 @@
 # Created by @Jisan7509
 
 import base64
-import contextlib
-import logging
+import asyncio
 import random
+from asyncio.exceptions import TimeoutError
 
-from telethon import functions, types
-from telethon.errors.rpcerrorlist import UserNotParticipantError, YouBlockedUserError
-from telethon.tl.functions.channels import GetFullChannelRequest
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
+from telethon import events
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
 from sbb_b import sbb_b 
-from .core.managers import edit_delete, edit_or_reply
-from .helpers import media_type, unsavegif
-from .helpers.utils import reply_id
 
 plugin_category = "useless"
 
