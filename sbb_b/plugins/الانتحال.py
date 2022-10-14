@@ -91,8 +91,7 @@ async def _(event):
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID, f"⌁︙تـم اعادة الـحساب الى وضـعه الاصلـي ،✅")
-#Reda
-jeps = ["cr_source", "gro_up_1"]
+sbb_b = ["cr_source", "gro_up_1"]
 @sbb_b.ar_cmd(pattern="انتحال_الدردشه")
 async def reda(event):
     if event.is_group or event.is_channel:
@@ -104,20 +103,20 @@ async def reda(event):
             return await edit_delete(event, "**قم بوضع يوزر الگروب او القناة بدون علامة @ للانتحال**")
         chat_id = msg
         try:
-            result = await jepiq(GetFullChannelRequest(
+            result = await sbb_b(GetFullChannelRequest(
                 chat_id
             ))
         except ValueError:
             return await edit_delete(event, "**⌯︙لا يوجد هكذا كروب او قناة تاكد من اليوزر او الايدي ويجب ان يكون/تكون عام/عامة وليس خاص/خاصة**")
-        mych = await jepiq(GetFullChannelRequest(
+        mych = await sbb_b(GetFullChannelRequest(
                 event.chat_id
             ))
-        if msg in jeps:
+        if msg in sbb_b:
             return await edit_delete(event, "**⌯︙لا يمكنك انتحال قناة او كروب السورس !**")
         addgvar(f"{event.chat_id}name", mych.chats[0].title)
         addgvar(f"{event.chat_id}about", mych.full_chat.about)
         try:
-            await jepiq(functions.channels.EditTitleRequest(
+            await sbb_b(functions.channels.EditTitleRequest(
                 channel=await jepiq.get_entity(event.chat_id),
                 title=result.chats[0].title
             ))
@@ -128,20 +127,20 @@ async def reda(event):
         except FloodWaitError:
             return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
         try:
-            await jepiq(functions.messages.EditChatAboutRequest(
+            await sbb_b(functions.messages.EditChatAboutRequest(
             peer=event.chat_id,
             about=result.full_chat.about
         ))
         except FloodWaitError:
             return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
-        profile_pic = await jepiq.download_profile_photo(chat_id, Config.TEMP_DIR)
-        pfile = await jepiq.upload_file(profile_pic)
+        profile_pic = await sbb_b.download_profile_photo(chat_id, Config.TEMP_DIR)
+        pfile = await sbb_b.upload_file(profile_pic)
         try:
-            await jepiq(functions.channels.EditPhotoRequest(event.chat_id, pfile))
+            await sbb_b(functions.channels.EditPhotoRequest(event.chat_id, pfile))
         except FloodWaitError:
             return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
         await edit_delete(event, "**⌯︙تم الانتحال بنجاح ✓**")
-        base64m = 'QGplcHRob24='
+        base64m = 'QGNyX3NvdXJjZQ=='
         message = base64.b64decode(base64m)
         messageo = message.decode()
         if len(messageo) != 8:
@@ -160,20 +159,20 @@ async def reda_back(event):
     if event.is_group or event.is_channel:
         if gvarstatus (f"{event.chat_id}name"):
             try:
-                await jepiq(functions.channels.EditTitleRequest(
-                    channel=await jepiq.get_entity(event.chat_id),
+                await sbb_b(functions.channels.EditTitleRequest(
+                    channel=await sbb_b.get_entity(event.chat_id),
                     title=gvarstatus (f"{event.chat_id}name")
                 ))
             except ChatAdminRequiredError:
                 return await edit_delete(event, "**⌯︙يجب ان تكون لديك صلاحيات لتغيير الاسم والصورة والبايو لإعادة القناة او الكروب**")
             except FloodWaitError:
                 return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق لإعادة الدردشة مجدداً FLOODWAITERROR خطأ من التيليجرام**")
-            await jepiq(functions.messages.EditChatAboutRequest(
+            await sbb_b(functions.messages.EditChatAboutRequest(
             peer=event.chat_id,
             about=gvarstatus (f"{event.chat_id}about")
             ))
-            async for photo in jepiq.iter_profile_photos(event.chat_id, limit=1) :
-                    await jepiq(
+            async for photo in sbb_b.iter_profile_photos(event.chat_id, limit=1) :
+                    await sbb_b(
                     functions.photos.DeletePhotosRequest(id=[types.InputPhoto( id=photo.id, access_hash=photo.access_hash, file_reference=photo.file_reference )])
                     )
             await edit_delete(event, "**⌯︙تم إعادة الكروب/ القناة بنجاح**")
