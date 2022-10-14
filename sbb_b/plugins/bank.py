@@ -52,12 +52,12 @@ async def cat(event):
     info={
         "header": "Sends random kiss",
         "usage": [
-            "{tr}kiss",
-            "{tr}kiss <1-20>",
+            "{tr}بوسة",
+            "{tr}بوسة  1-20",
         ],
     },
 )
-async def kiss(event):
+async def بوسة(event):
     """Its useless for single like you. Get a lover first"""
     inpt = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
