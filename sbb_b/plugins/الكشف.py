@@ -99,14 +99,12 @@ async def fetch_info(replied_user, event):
         and user_id != 1001132193
         else rozrtba
     )    
-    caption += f"<b>╮•⎚ مـعلومات الـشخص مـن بـوت كرستين</b>\n"
+    caption += f"<b> ╮•⎚ مـعلومات الـشخص مـن بـوت كرستين</b>\n"
     caption += f"<b> الاسـم    ⇦ </b> {first_name} {last_name}\n"
     caption += f"<b> المعـرف  ⇦ </b> {username}\n"
     caption += f"<b> الايـدي   ⇦ </b> <code>{user_id}</code>\n"
     caption += f"<b> الرتبـــه  ⇦ {rotbat} </b>\n"
     caption += f"<b> الصـور   ⇦ </b> {replied_user_profile_photos_count}\n"
-    caption += f"<b> الحسـاب ⇦ </b> "
-    caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
     caption += f"\n<b> الـمجموعات المشتـركة ⇦ </b> {common_chat} \n"
     caption += f"<b> البايـو    ⇦ </b> {user_bio} \n"
     caption += f"<b> ٴ•━─━ََِِ𝗰ًًٍٍ𝗥ٍٍٖٔ𝗧ََِِ𝗲ّّ𝗮ِِّّ𝗺━─━• </b>\n"
