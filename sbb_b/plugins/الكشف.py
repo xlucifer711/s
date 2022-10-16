@@ -107,8 +107,7 @@ async def fetch_info(replied_user, event):
     caption += f"<b> الصـور   ⇦ </b> {replied_user_profile_photos_count}\n"
     caption += f"\n<b> الـمجموعات المشتـركة ⇦ </b> {common_chat} \n"
     caption += f"<b> البايـو    ⇦ </b> {user_bio} \n"
-    caption += f"<b> ٴ•━─━ََِِ𝗰ًًٍٍ𝗥ٍٍٖٔ𝗧ََِِ𝗲ّّ𝗮ِِّّ𝗺━─━• </b>\n"
-    caption += f"<b> 𓆩 ََِِ𝗰.ًًٍٍ𝗥 ََِِ𝘀ُُ𝗼ًًٍٍ𝗨ًًٍٍ𝗥ََِِ𝗰ََِِ𝗲 𓆪 </b> - @cr_source"
+    caption += f"<b> 🇨 🇷 🇮 🇸 🇹 🇪 🇳 𖠖 </b> - @cr_source"
     return photo, caption
 
 @sbb_b.ar_cmd(pattern="ايدي(?: |$)(.*)")
