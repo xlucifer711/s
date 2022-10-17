@@ -100,6 +100,7 @@ async def fetch_info(replied_user, event):
         else rozrtba
     )     
     caption = " ╮•⎚ مـعلومات الـشخص مـن بـوت كرستين\n"
+    caption += f" 🇨 🇷 🇮 🇸 🇹 🇪 🇳 𖠖\n"
     caption += f"╽<b>- ❃الاسـم ⇜ </b> {full_name}\n"
     caption += f"╽<b>- ❃المـعـرف ⇜ </b> {username}\n"
     caption += f"╽<b>- ❃الايـدي  ⇜</b> <code>{user_id}</code>\n"
@@ -114,7 +115,7 @@ async def fetch_info(replied_user, event):
 
 @sbb_b.ar_cmd(pattern="ايدي(?: |$)(.*)")
 async def who(event):
-    roz = await edit_or_reply(event, "**⌔∮ جار التعرف على المستخدم انتظر قليلا**")
+    roz = await edit_or_reply(event, "⇆")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     replied_user = await get_user_from_event(event)
