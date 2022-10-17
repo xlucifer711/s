@@ -96,7 +96,7 @@ async def fetch_info(replied_user, event):
         and user_id != 1001132193
         and user_id != 1355571767
         and user_id != 929790454
-        and user_id !=1833610203
+        and user_id != 1833610203
         else rozrtba
     )    
     caption = " ╮•⎚ مـعلومات الـشخص مـن بـوت كرستين\n"
