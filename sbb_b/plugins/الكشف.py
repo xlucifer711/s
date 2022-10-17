@@ -111,7 +111,7 @@ async def fetch_info(replied_user, event):
     caption += f"╽<b>- رابط حسـابه ⇜</b> "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>\n'
     caption += f"✛━━━━━𝙲𝚁𝙸𝚂𝚃𝙴𝙽━━━━━✛\n"
-    caption += f" 𓆩 ᥴ.ᖇ ᥉᥆υᖇᥴᥱ 𓆪 - @cr_source"
+    caption += f"[ ┈┉━｢ᥴ.𝘳 𝘴ꪮꪊ𝘳ᥴꫀ  ｣━┅┈ ](t.me/cr_source)"
     return photo, caption
 
 @sbb_b.ar_cmd(pattern="ايدي(?: |$)(.*)")
