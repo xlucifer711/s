@@ -86,18 +86,19 @@ async def fetch_info(replied_user, event):
     rozrtba = (
         ".「  مآلُِڪ آلُِسورس 𓄂𓆃 」."
         if user_id == 1355571767 or user_id == 1050898456 or user_id == 1001132193 or user_id == 1099460779 or user_id == 627658332 or user_id == 1833610203
+        else (".「  العضـو 𓅫 」.")
     )
     rozrtba = (
         ".「 مـالك الحساب  」."
         if user_id == (await event.client.get_me()).id
-        and user_id != 1050898456
-        and user_id != 1099460779
-        and user_id != 1001132193
-        and user_id != 1355571767
-        and user_id != 929790454
         and user_id != 1833610203
+        and user_id != 627658332
+        and user_id != 1099460779
+        and user_id != 1355571767
+        and user_id != 1050898456
+        and user_id != 1001132193
         else rozrtba
-    )    
+    )     
     caption = " ╮•⎚ مـعلومات الـشخص مـن بـوت كرستين\n"
     caption += f"╽<b>- ❃الاسـم ⇜ </b> {full_name}\n"
     caption += f"╽<b>- ❃المـعـرف ⇜ </b> {username}\n"
