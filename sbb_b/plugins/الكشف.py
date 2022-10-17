@@ -100,7 +100,7 @@ async def fetch_info(replied_user, event):
         else rozrtba
     )     
     caption = " ╮•⎚ مـعلومات الـشخص مـن بـوت كرستين\n"
-    caption += f"╽✛━━━━━𝙲𝚁𝙸𝚂𝚃𝙴𝙽━━━━━✛\n"
+    caption += f"╽✛┈┉━｢ ᥴ.𝘳 𝘴ꪮꪊ𝘳ᥴꫀ ｣━┅┈✛\n"
     caption += f"╽<b>- ❃الاسـم ⇜ </b> {full_name}\n"
     caption += f"╽<b>- ❃المـعـرف ⇜ </b> {username}\n"
     caption += f"╽<b>- ❃الايـدي  ⇜</b> <code>{user_id}</code>\n"
@@ -110,8 +110,8 @@ async def fetch_info(replied_user, event):
     caption += f"╽<b>-️ ❃الـنبـذه ⇜</b> \n<code>{user_bio}</code>\n"
     caption += f"╽<b>- رابط حسـابه ⇜</b> "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>\n'
-    caption += f"✛━━━━━𝙲𝚁𝙸𝚂𝚃𝙴𝙽━━━━━✛\n"
-    caption += f"[ ┈┉━｢ᥴ.𝘳 𝘴ꪮꪊ𝘳ᥴꫀ  ｣━┅┈ ](t.me/cr_source)"
+    caption += f"✛┈┉━｢ ᥴ.𝘳 𝘴ꪮꪊ𝘳ᥴꫀ ｣━┅┈✛\n"
+    caption += f"♤ @cr_source ♤"
     return photo, caption
 
 @sbb_b.ar_cmd(pattern="ايدي(?: |$)(.*)")
