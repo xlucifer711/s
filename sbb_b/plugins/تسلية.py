@@ -1,4 +1,4 @@
-from . import ALIVE_NAME, catub, edit_or_reply
+from . import ALIVE_NAME, sbb_b, edit_or_reply
 
 plugin_category = "fun"
 
