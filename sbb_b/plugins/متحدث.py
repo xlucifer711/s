@@ -54,8 +54,8 @@ async def _(event):
 
 
 @sbb_b.ar_cmd(
-    pattern="طفي$",
-    command=("طفي", plugin_category),
+    pattern="هووف$",
+    command=("هووف", plugin_category),
     info={
         "header": "Fun art.",
         "usage": "{tr}aag",
@@ -83,8 +83,8 @@ async def _(event):
 
 
 @sbb_b.ar_cmd(
-    pattern="شغل$",
-    command=("شغل", plugin_category),
+    pattern="مذكرة$",
+    command=("مذكرة", plugin_category),
     info={
         "header": "Fun art.",
         "usage": "{tr}work",
