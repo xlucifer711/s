@@ -41,19 +41,3 @@ async def nope(event):
     await event.delete()
 
 
-@sbb_b.ar_cmd(pattern="اكس او(?: |$)(.*)")
-async def nope(event):
-    ok = event.pattern_match.group(1)
-    if not ok:
-        if event.is_reply:
-            (await event.get_reply_message()).message
-
-            return
-    xoxoxo = await bot.inline_query("xobot", f"{(deEmojify(ok))}")
-    await xoxoxo[0].click(
-        event.chat_id,
-        reply_to=event.reply_to_msg_id,
-        silent=True if event.is_reply else False,
-        hide_via=True,
-    )
-    await event.delete()
