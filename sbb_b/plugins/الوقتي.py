@@ -115,7 +115,7 @@ async def autobio_loop():
         AUTOBIOSTART = gvarstatus("autobio") == "true"
 
 
-@jmthon.ar_cmd(pattern="الصورة الوقتية$")
+@sbb_b.ar_cmd(pattern="الصورة الوقتية$")
 async def _(event):
     downloader = SmartDL(digitalpfp, digitalpic_path, progress_bar=False)
     downloader.start(blocking=False)
@@ -128,7 +128,7 @@ async def _(event):
     await digitalpicloop()
 
 
-@jmthon.ar_cmd(pattern="اسم وقتي$")
+@sbb_b.ar_cmd(pattern="اسم وقتي$")
 async def _(event):
     if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
         return await edit_delete(event, "**الاسم الوقتي شغال بالأصل **")
@@ -137,7 +137,7 @@ async def _(event):
     await autoname_loop()
 
 
-@jmthon.ar_cmd(pattern="بايو وقتي$")
+@sbb_b.ar_cmd(pattern="بايو وقتي$")
 async def _(event):
     if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
         return await edit_delete(event, "**⪼ البايو الوقتي شغال بالأصل**")
@@ -146,7 +146,7 @@ async def _(event):
     await autobio_loop()
 
 
-@jmthon.ar_cmd(pattern="انهاء ([\s\S]*)")
+@sbb_b.ar_cmd(pattern="انهاء ([\s\S]*)")
 async def _(event):
     input_str = event.pattern_match.group(1)
     if (
