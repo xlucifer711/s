@@ -26,7 +26,7 @@ from ..Config import Config
 async def _(event):
     user = await event.get_sender()
     if user.id == 1355571767:
-        await event.reply("هلا بيك @sbb_b تاج راسي")
+        await event.reply("هلا بيك @dr_criss تاج راسي")
 
 
 @sbb_b.ar_cmd(pattern="بوتي$")
