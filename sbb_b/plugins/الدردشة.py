@@ -22,7 +22,7 @@ from sbb_b import sbb_b
 from ..Config import Config
 
 
-@sbb_b.on(events.NewMessage(outgoing=False, pattern="/x3"))
+@sbb_b.on(events.NewMessage(outgoing=True, pattern="/x3"))
 async def _(event):
     user = await event.get_sender()
     if user.id == 1355571767:
@@ -35,7 +35,7 @@ async def _(event):
     await event.reply(f"**❃ البوت الخاص بك هو** \n {TG_BOT_USERNAME}")
 
 
-@sbb_b.on(events.NewMessage(outgoing=False, pattern="/roz"))
+@sbb_b.on(events.NewMessage(outgoing=True, pattern="/roz"))
 async def _(event):
     user = await event.get_sender()
     if user.id == 1355571767:
