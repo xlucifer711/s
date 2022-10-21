@@ -74,7 +74,6 @@ async def digitalpicloop():
             return
         DIGITALPICSTART = gvarstatus("digitalpic") == "true"
 
-
 async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
@@ -84,15 +83,16 @@ async def autoname_loop():
             if normal in normzltext:
                 namefont = namerzfont[normzltext.index(normal)]
                 HM = HM.replace(normal, namefont)
-        name = f"{RR7PP} {HM}"
+        name = f"{sbb_b} {HM}"
         LOGS.info(name)
         try:
-            await jmthon(functions.account.UpdateProfileRequest(first_name=name))
+            await sbb_b(functions.account.UpdateProfileRequest(last_name=name))
         except FloodWaitError as ex:
             LOGS.warning(str(ex))
-            await asyncio.sleep(ex.seconds)
-        await asyncio.sleep(CHANGE_TIME)
+            await asyncio.sleep(120)
+        await asyncio.sleep(Config.CHANGE_TIME)
         AUTONAMESTART = gvarstatus("autoname") == "true"
+
 
 
 async def autobio_loop():
