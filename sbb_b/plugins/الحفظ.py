@@ -33,17 +33,6 @@ async def saf(e):
     await edit_delete(e, "- تم بنجاح حفظ الرسالة في الرسائل المحفوظة", time=8)
 
 
-@sbb_b.ar_cmd(pattern="همسة ?(.*)")
-async def roz(event):
-    razan = event.pattern_match.group(1)
-    BE = "@whisperBot"
-    if event.reply_to_msg_id:
-        await event.get_reply_message()
-    R7 = await sbb_b.inline_query(BE, razan)
-    await R7[0].click(event.chat_id)
-    await event.delete()
-
-
 @sbb_b.ar_cmd(pattern="ايجاد الفايروسات$")
 async def _(event):
     input_str = event.pattern_match.group(1)
