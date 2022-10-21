@@ -88,7 +88,7 @@ async def bot_start(event):
     my_last = user.last_name
     my_fullname = f"{my_first} {my_last}" if my_last else my_first
     my_username = f"@{user.username}" if user.username else my_mention
-    custompic = gvarstatus("BOT_START_PIC") or None
+    custompic = gvarstatus("BOT_START_PIC") or "https://telegra.ph/file/54699e9f531dfac087926.jpg"
     if chat.id != Config.OWNER_ID:
         customstrmsg = gvarstatus("START_TEXT") or None
         if customstrmsg is not None:
