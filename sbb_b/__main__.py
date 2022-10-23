@@ -64,21 +64,3 @@ async def startup_process():
     await startupmessage()
     return
 
-async def externalrepo():
-    if Config.VCMODE:
-        await install_externalrepo("https://github.com/xlucifer711/sbb_bvc", "sbb_b", "sbb_bvc")
-
-sbb_b.loop.run_until_complete(externalrepo())
-sbb_b.loop.run_until_complete(startup_process())
-
-if len(sys.argv) not in (1, 3, 4):
-    sbb_b.disconnect()
-elif not Catcheck.sucess:
-    if HEROKU_APP is not None:
-        HEROKU_APP.restart()
-else:
-    try:
-        sbb_b.run_until_disconnected()
-    except ConnectionError:
-        pass
-
