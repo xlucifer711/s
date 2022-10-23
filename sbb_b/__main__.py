@@ -37,7 +37,6 @@ except Exception as bb:
     LOGS.error(f"- {bb}")
     sys.exit()
 
-
 try:
     LOGS.info("يتم تفعيل وضع الانلاين")
     sbb_b.loop.run_until_complete(mybot())
@@ -57,14 +56,12 @@ async def startup_process():
         f"لمعرفة اوامر السورس ارسل {cmdhr}الاوامر\
         \nمجموعة قناة السورس  https://t.me/cr_source"
     )
-    print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+    print("============================================================")
     await verifyLoggerGroup()
-    await saves()
     await add_bot_to_logger_group(BOTLOG_CHATID)
     if PM_LOGGER_GROUP_ID != -100:
         await add_bot_to_logger_group(PM_LOGGER_GROUP_ID)
     await startupmessage()
-    Catcheck.sucess = True
     return
 
 async def externalrepo():
