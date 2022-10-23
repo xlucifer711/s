@@ -18,14 +18,14 @@ from .utils import (
 
 LOGS = logging.getLogger("sbb_b")
 
-print(jepthon.__copyright__)
-print("Licensed under the terms of the " + jepthon.__license__)
+print(sbb_b.__copyright__)
+print("Licensed under the terms of the " + crsource.__license__)
 
 cmdhr = Config.COMMAND_HAND_LER
 
 try:
     LOGS.info("جارِ بدء بوت كرستين ✓")
-    jepiq.loop.run_until_complete(setup_bot())
+    sbb_b.loop.run_until_complete(setup_bot())
     LOGS.info("تم اكتمال تنصيب البوت ✓")
 except Exception as e:
     LOGS.error(f"{str(e)}")
@@ -33,7 +33,7 @@ except Exception as e:
 
 try:
     LOGS.info("يتم تفعيل وضع الانلاين")
-    jepiq.loop.run_until_complete(mybot())
+    sbb_b.loop.run_until_complete(mybot())
     LOGS.info("تم تفعيل وضع الانلاين بنجاح ✓")
 except Exception as jep:
     LOGS.error(f"- {jep}")
