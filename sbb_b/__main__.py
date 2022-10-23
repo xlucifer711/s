@@ -69,7 +69,7 @@ async def startup_process():
 
 async def externalrepo():
     if Config.VCMODE:
-        await install_externalrepo("https://github.com/xlucifer711/jepvc", "jepvc", "sbb_bvc")
+        await install_externalrepo("https://github.com/xlucifer711/sbb_bvc", "sbb_b", "sbb_bvc")
 
 sbb_b.loop.run_until_complete(externalrepo())
 sbb_b.loop.run_until_complete(startup_process())
