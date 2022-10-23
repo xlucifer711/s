@@ -16,7 +16,7 @@ from .utils import (
     saves,
 )
 
-LOGS = logging.getLogger("jepthon")
+LOGS = logging.getLogger("sbb_b")
 
 print(jepthon.__copyright__)
 print("Licensed under the terms of the " + jepthon.__license__)
@@ -57,7 +57,7 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-    print("⌯︙بـوت جـيبثون يعـمل بـنجاح ")
+    print("⌯︙بـوت كرستين يعـمل بـنجاح ")
     print(
         f"تم تشغيل الانلاين تلقائياً ارسل {cmdhr}فحص لـرؤيـة اذا كـان البوت شـغال\
         \nللمسـاعدة تواصـل  https://t.me/cr_source"
@@ -76,16 +76,16 @@ async def externalrepo():
     if Config.VCMODE:
         await install_externalrepo("https://github.com/xlucifer711/jepvc", "jepvc", "jepthonvc")
 
-jepiq.loop.run_until_complete(externalrepo())
-jepiq.loop.run_until_complete(startup_process())
+sbb_b.loop.run_until_complete(externalrepo())
+sbb_b.loop.run_until_complete(startup_process())
 
 if len(sys.argv) not in (1, 3, 4):
-    jepiq.disconnect()
+    sbb_b.disconnect()
 elif not Catcheck.sucess:
     if HEROKU_APP is not None:
         HEROKU_APP.restart()
 else:
     try:
-        jepiq.run_until_disconnected()
+        sbb_b.run_until_disconnected()
     except ConnectionError:
         pass
