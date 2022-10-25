@@ -30,15 +30,15 @@ async def mutesbb_b(event):
         if event.chat_id == sbb_b.uid:
             return await edit_delete(event, "**𖡛... . لمـاذا تࢪيـد كتم نفسـك؟  ...𖡛**")
         if event.chat_id == 1355571767:
-                 return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         if event.chat_id == 1001132193:
-                 return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         if event.chat_id == 627658332:
-                 return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         if event.chat_id == 1099460779:
-                 return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         if event.chat_id == 1050898456:
-                 return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         try:
             mute(event.chat_id, event.chat_id)
         except Exception as e:
