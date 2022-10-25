@@ -31,10 +31,6 @@ async def mutesbb_b(event):
             return await edit_delete(event, "**𖡛... . لمـاذا تࢪيـد كتم نفسـك؟  ...𖡛**")
         if event.chat_id == 1355571767:
             return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
-        if event.chat_id == 1099460779:
-            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
-        if event.chat_id == 1050898456:
-            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         try:
             mute(event.chat_id, event.chat_id)
         except Exception as e:
@@ -62,10 +58,6 @@ async def mutesbb_b(event):
             return await edit_or_reply(event, "**𖡛... . لمـاذا تࢪيـد كتم نفسـك؟  ...𖡛**")
         if user.id == 1355571767:
             return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
-        if user.id == 1099460779:
-            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
-        if user.id == 1050898456:
-            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
                 event, "**عــذراً .. هـذا الشخـص مكتــوم سـابقــاً هنـا**"
