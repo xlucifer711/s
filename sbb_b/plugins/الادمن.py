@@ -241,15 +241,15 @@ async def endmute(event):
     if not user:
         return
     if user.id == 1001132193:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 1355571767:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 627658332:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 1099460779:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 1050898456:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     catevent = await edit_or_reply(event, "⌯︙يـتم طـرد الـمستخدم أنتـظر")
     try:
         await event.client.kick_participant(event.chat_id, user.id)
@@ -282,15 +282,15 @@ async def _ban_person(event):
     if not user:
         return
     if user.id == 1001132193:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 1355571767:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 627658332:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 1099460779:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     if user.id == 1050898456:
-           return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
+        return await edit_delete(event, "- لا يمڪنني حظر مطـوري دي لك")
     catevent = await edit_or_reply(event, "⌯︙تـم حـظره بـنجاح")
     try:
         await event.client(EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS))
