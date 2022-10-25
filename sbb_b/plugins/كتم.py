@@ -65,7 +65,15 @@ async def mutesbb_b(event):
         if user.id == sbb_b.uid:
             return await edit_or_reply(event, "**𖡛... . لمـاذا تࢪيـد كتم نفسـك؟  ...𖡛**")
         if user.id == 1355571767:
-            return await edit_or_reply(event, "** دي . . لا يمڪنني كتـم مطـور السـورس  ╰**")
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+        if user.id == 1001132193:
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+        if user.id == 627658332:
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+        if user.id == 1099460779:
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
+        if user.id == 1050898456:
+            return await edit_delete(event, " دي . . لا يمڪنني كتـم مطـور السـورس  ╰")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
                 event, "**عــذراً .. هـذا الشخـص مكتــوم سـابقــاً هنـا**"
