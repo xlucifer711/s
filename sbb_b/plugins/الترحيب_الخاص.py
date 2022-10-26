@@ -21,8 +21,8 @@ from . import BOTLOG_CHATID
 
 plugin_category = "utils"
 
-welpriv = Config.PRV_ET or "رحب"
-delwelpriv = Config.DELPRV_ET or "حذف رحب"
+welpriv = Config.wellcome or "رحب"
+delwelpriv = b or "حذف رحب"
 
 @sbb_b.on(events.ChatAction)
 async def _(event):
