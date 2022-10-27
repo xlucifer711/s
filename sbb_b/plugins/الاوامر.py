@@ -184,3 +184,14 @@ async def hi(event):
     )
     await event.delete()
     
+    )
+@sbb_b.ar_cmd(
+    pattern="بصمات انمي$",
+    command=("بصمات انمي", plugin_category),
+    )
+async def _(event):
+     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+        await event.edit(
+        " قائمة اوامر بصمات الانمي\n★•┉ ┉ ┉ ┉ ┉ ┉  ┉ ┉ ┉ ┉•★➖\n᯽︙ اختر احدى هذه الاوامر\n\n- ( `.انمي1` )\n- ( `.انمي2` )\n- ( `.انمي3` )\n- ( `.انمي4` )\n- ( `.انمي5` )\n- ( `.انمي6` )\n- ( `.انمي7` )\n- ( `.انمي8` )\n- ( `.انمي9` )\n- ( `.انمي10` )\n\n★•┉ ┉ ┉ ┉ ┉ ┉  ┉ ┉ ┉ ┉•★➖\n⌔︙CH : @cr_source"
+
+    )
