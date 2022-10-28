@@ -7,7 +7,7 @@ from sbb_b.helpers import get_user_from_event
 
 from . import *
 
-
+plugin_category = "utils"
 
 
 #كـتابة المـلف وتعديل.    :   السيد حسين.   اخمط وسمي روحك مطور فرخي 😂
