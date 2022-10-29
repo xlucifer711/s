@@ -10,7 +10,7 @@ bot_username = '@t06bot'
 jepthon = ['yes']
 
 
-@sbb_b.on(events.NewMessage(outgoing=True, pattern=r"\.تجميع نقاط"))
+@sbb_b.on(admin_cmd(pattern="(تجميع النقاط|تجميع نقاط)"))
 async def _(event):
     if jepthon[0] == "yes":
         await event.edit("**᯽︙سيتم تجميع النقاط , قبل كل شي تأكد من انك قمت بلانظمام الى القنوات الاشتراك الاجباري للبوت لعدم حدوث اخطاء**")
