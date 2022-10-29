@@ -7,7 +7,7 @@ import asyncio
 from telethon import events
 c = requests.session()
 bot_username = '@t06bot'
-sbb_b = ['yes']
+jepthon = ['yes']
 
 
 @sbb_b.on(events.NewMessage(outgoing=True, pattern=r"\.تجميع نقاط"))
