@@ -1,4 +1,3 @@
-
 from sbb_b import sbb_b
 from telethon.tl.functions.messages import GetHistoryRequest
 from telethon.tl.functions.channels import JoinChannelRequest
@@ -8,7 +7,7 @@ import asyncio
 from telethon import events
 c = requests.session()
 bot_username = '@t06bot'
-jepthon = ['yes']
+sbb_b = ['yes']
 
 
 @sbb_b.on(events.NewMessage(outgoing=True, pattern=r"\.تجميع نقاط"))
