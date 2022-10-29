@@ -1,4 +1,4 @@
- منعاً باتاً تخمط الملف خلي عندك كرامه ولتسرقة
+
 from sbb_b import sbb_b
 from telethon.tl.functions.messages import GetHistoryRequest
 from telethon.tl.functions.channels import JoinChannelRequest
