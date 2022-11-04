@@ -1,4 +1,4 @@
-\import sys
+import sys
 
 from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 
