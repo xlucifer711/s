@@ -822,3 +822,97 @@ async def variable(var):
                 "**⌔∮ تم بنجاح تغيير زخرفة الاسم الوقتي الخاص بك\n\n❃ جار اعادة تشغيل السورس انتظر من 2-5 دقائق ليتشغل مره اخرى**",
             )
         heroku_var[variable] = vra
+  
+@sbb_b.ar_cmd(pattern="ميوزك(?:\s|$)([\s\S]*)")
+async def variable(event):
+    if Config.HEROKU_API_KEY is None:
+        return await ed(
+            event,
+            "اضبط Var المطلوب في Heroku على وظيفة هذا بشكل طبيعي `HEROKU_API_KEY` اذا كنت لاتعلم اين يوجد فقط اذهب الى حسابك في هيروكو ثم الى الاعدادات ستجده بالاسفل انسخه ودخله في الفار. ",
+        )
+    if Config.HEROKU_APP_NAME is not None:
+        app = Heroku.app(Config.HEROKU_APP_NAME)
+    else:
+        return await ed(
+            event,
+            "اضبط Var المطلوب في Heroku على وظيفة هذا بشكل طبيعي `HEROKU_APP_NAME` اسم التطبيق اذا كنت لاتعلم.",
+        )
+    input_str = event.pattern_match.group(1)
+    heroku_var = app.config()
+    jep = await edit_or_reply(event, "** جارِ تغير وضع الميوزك ✅ . . .**")
+    if input_str == "تفعيل":
+        variable = "VCMODE"
+        zinfo = "True"
+        await asyncio.sleep(1.5)
+        if variable in heroku_var:
+            await jep.edit("**⌔∮ تم بنجاح تغيير وضع الميوزك\n\n❃ جار اعادة تشغيل السورس انتظر من 2-5 دقائق ليتشغل مره اخرى**".format(input_str))
+        else:
+            await jep.edit("**⌔∮ تم بنجاح تغيير وضع الميوزك\n\n❃ جار اعادة تشغيل السورس انتظر من 2-5 دقائق ليتشغل مره اخرى**".format(input_str))
+        heroku_var[variable] = zinfo
+    elif input_str == "تعطيل":
+        variable = "VCMODE"
+        zinfo = "False"
+        await asyncio.sleep(1.5)
+        if variable in heroku_var:
+            await jep.edit("**⌔∮ تم بنجاح تغيير وضع الميوزك\n\n❃ جار اعادة تشغيل السورس انتظر من 2-5 دقائق ليتشغل مره اخرى**".format(input_str))
+        else:
+            await jep.edit("**⌔∮ تم بنجاح تغيير وضع الميوزك\n\n❃ جار اعادة تشغيل السورس انتظر من 2-5 دقائق ليتشغل مره اخرى**".format(input_str))
+        heroku_var[variable] = zinfo
+
+
+@sbb_b.ar_cmd(pattern="استخدامي$")
+async def dyno_usage(dyno):
+    if (HEROKU_APP_NAME is None) or (HEROKU_API_KEY is None):
+        return await edit_delete(
+            dyno,
+            "عزيزي المستخدم يجب ان تعين معلومات الفارات التالية لاستخدام اوامر الفارات\n `HEROKU_API_KEY`\n `HEROKU_APP_NAME`.",
+        )
+    dyno = await edit_or_reply(dyno, "**- يتم جلب المعلومات انتظر قليلا**")
+    useragent = (
+        "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/80.0.3987.149 Mobile Safari/537.36"
+    )
+    user_id = Heroku.account().id
+    headers = {
+        "User-Agent": useragent,
+        "Authorization": f"Bearer {Config.HEROKU_API_KEY}",
+        "Accept": "application/vnd.heroku+json; version=3.account-quotas",
+    }
+    path = "/accounts/" + user_id + "/actions/get-quota"
+    r = requests.get(heroku_api + path, headers=headers)
+    if r.status_code != 200:
+        return await dyno.edit("**خطا: يوجد شي غير صحيح حدث**\n\n" f">.`{r.reason}`\n")
+    result = r.json()
+    quota = result["account_quota"]
+    quota_used = result["quota_used"]
+
+    # - Used -
+    remaining_quota = quota - quota_used
+    percentage = math.floor(remaining_quota / quota * 100)
+    minutes_remaining = remaining_quota / 60
+    hours = math.floor(minutes_remaining / 60)
+    minutes = math.floor(minutes_remaining % 60)
+    # - Current -
+    App = result["apps"]
+    try:
+        App[0]["quota_used"]
+    except IndexError:
+        AppQuotaUsed = 0
+        AppPercentage = 0
+    else:
+        AppQuotaUsed = App[0]["quota_used"] / 60
+        AppPercentage = math.floor(App[0]["quota_used"] * 100 / quota)
+    AppHours = math.floor(AppQuotaUsed / 60)
+    AppMinutes = math.floor(AppQuotaUsed % 60)
+    await asyncio.sleep(1.5)
+    return await dyno.edit(
+        "**استخدام الدينو**:\n\n"
+        f" -> `استخدام الدينو لتطبيق`  **{Config.HEROKU_APP_NAME}**:\n"
+        f"     •  `{AppHours}`**ساعات**  `{AppMinutes}`**دقائق**  "
+        f"**|**  [`{AppPercentage}`**%**]"
+        "\n\n"
+        " -> الساعات المتبقية لهذا الشهر :\n"
+        f"     •  `{hours}`**ساعات**  `{minutes}`**دقائق**  "
+        f"**|**  [`{percentage}`**%**]"
+    )
