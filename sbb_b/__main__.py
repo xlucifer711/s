@@ -67,20 +67,10 @@ async def startup_process():
     return
 
 
-async def externalrepo():
-    if Config.VCMODE:
-        await install_externalrepo("https://github.com/jepthoniq/JepVc", "jepvc", "jepthonvc")
-
-sbb_b.loop.run_until_complete(externalrepo())
 sbb_b.loop.run_until_complete(startup_process())
 
-if len(sys.argv) not in (1, 3, 4):
-    sbb_b.disconnect()
-elif not Catcheck.sucess:
-    if HEROKU_APP is not None:
-        HEROKU_APP.restart()
-else:
-    try:
+if len(sys.argv) in {1, 3, 4}:
+    with contextlib.suppress(ConnectionError):
         sbb_b.run_until_disconnected()
-    except ConnectionError:
-        pass
+else:
+    sbb_b.disconnect()
