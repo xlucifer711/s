@@ -1,43 +1,11 @@
-import re
 import asyncio
-import calendar
-import json
-import os
-from telethon import events
+import random
 from asyncio.exceptions import TimeoutError
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.messages import ExportChatInviteRequest
-from sbb_b import sbb_b 
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers import get_user_from_event, sanga_seperator
-from bs4 import BeautifulSoup
-from ..helpers.utils import _format
-from datetime import datetime
-from urllib.parse import quote
-import barcode
-import qrcode
-import requests
-from barcode.writer import ImageWriter
-from bs4 import BeautifulSoup
-from PIL import Image, ImageColor
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot import iqthon
-from ..Config import Config
-from ..core.logger import logging
-from ..core.managers import edit_delete, edit_or_reply
-from sbb_b.utils import admin_cmd
-from ..helpers import AioHttp
-from ..helpers.utils import _catutils, _format, reply_id
-LOGS = logging.getLogger(__name__)
-IQMOG = re.compile(
-    "[" 
-    "\U0001F1E0-\U0001F1FF"      "\U0001F300-\U0001F5FF"      "\U0001F600-\U0001F64F"   "\U0001F680-\U0001F6FF"  
-    "\U0001F700-\U0001F77F"      "\U0001F780-\U0001F7FF"      "\U0001F800-\U0001F8FF"     "\U0001F900-\U0001F9FF"      "\U0001FA00-\U0001FA6F"  
-    "\U0001FA70-\U0001FAFF"      "\U00002702-\U000027B0"      
-    "]+")
 
-def iqtfy(inputString: str) -> str:
-    return re.sub(IQMOG, "", inputString)
+from telethon import events
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
+from sbb_b import sbb_b 
 
 
 @sbb_b.on(admin_cmd(pattern="بي دي اف ?(.*)"))
