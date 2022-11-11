@@ -150,7 +150,7 @@ async def _(event):
         sudousers = {}
     if len(sudochats) == 0:
         return await edit_delete(
-            event, "**• يبدو انك لم تقوم بأضافة مستخدم متحكم لجمثون الخاص بك**"
+            event, "**• يبدو انك لم تقوم بأضافة مستخدم متحكم بوت كرستين الخاص بك**"
         )
     result = "**قائمة المستخدمين المتحكمين بتنصيب كرستين :**\n\n"
     for chat in sudochats:
