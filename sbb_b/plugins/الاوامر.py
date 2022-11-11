@@ -233,7 +233,6 @@ async def hi(event):
     await event.delete()            
     
     
-   
 @sbb_b.ar_cmd(pattern="م28")
 async def we(event):
     await edit_or_reply(
