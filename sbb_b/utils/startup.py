@@ -124,7 +124,7 @@ async def startupmessage():
         if BOTLOG:
             Config.JMTHONLOGO = await sbb_b.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/5209afbe8caa414f92b3d.mp4",
+                "https://telegra.ph/file/3efab271df61d1370f7c1.mp4",
                 caption="**تم تشغيل سورس كرستين بنجاح لعرض الاوامر ارسل .الاوامر**",
                 buttons=[(Button.url("كروب المساعدة", "https://t.me/gro_up_1"),)],
             )
