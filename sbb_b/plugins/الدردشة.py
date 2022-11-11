@@ -1,65 +1,81 @@
-import os
-import random
+# creidts @R0r77
+# idea https://github.com/LaKsH-X/SatoruBot/blob/master/EmikoRobot/modules/tagall.py
+# t.me/jmthon
 
-from PIL import Image, ImageDraw, ImageFont
-from telethon import events
+import contextlib
+from asyncio import sleep
+
+from telethon.errors import (
+    ChatAdminRequiredError,
+    FloodWaitError,
+    MessageNotModifiedError,
+    UserAdminInvalidError,
+)
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import InputMessagesFilterDocument, InputMessagesFilterPhotos
+from telethon.tl import functions
+from telethon.tl.functions.channels import EditBannedRequest
+from telethon.tl.types import (
+    ChannelParticipantsAdmins,
+    ChannelParticipantsBanned,
+    ChannelParticipantsKicked,
+    ChatBannedRights,
+)
+from telethon.utils import get_display_name
 
-from sbb_b import sbb_b 
+from sbb_b import sbb_b
+
+from ..Config import Config
+from ..core.logger import logging
+from ..core.managers import edit_delete, edit_or_reply
+from ..helpers import readable_time
+from ..helpers.utils import reply_id
+from ..utils import is_admin
+from . import BOTLOG, BOTLOG_CHATID
+
+LOGS = logging.getLogger(__name__)
+
+BANNED_RIGHTS = ChatBannedRights(
+    until_date=None,
+    view_messages=True,
+    send_messages=True,
+    send_media=True,
+    send_stickers=True,
+    send_gifs=True,
+    send_games=True,
+    send_inline=True,
+    embed_links=True,
+)
+
+import asyncio
+
+from telethon import events
+from telethon.errors import UserNotParticipantError
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.channels import GetParticipantRequest
+
+from sbb_b import sbb_b
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
 from ..helpers.utils import reply_id
-from . import sbb_b, mention
+from . import sbb_b
 
+spam_chats = []
 chr = Config.COMMAND_HAND_LER
-RR7PP = "اهلا بك زين مطوري @wjj_u"
-PICS_STR = []
-
-from sbb_b import sbb_b 
-
-from ..Config import Config
 
 
-@sbb_b.on(events.NewMessage(outgoing=False, pattern="/x3"))
-async def _(event):
-    user = await event.get_sender()
-    if user.id == 1355571767:
-        await event.reply("هلا بيك @dr_criss تاج راسي")
+async def ban_user(chat_id, i, rights):
+    try:
+        await sbb_b(functions.channels.EditBannedRequest(chat_id, i, rights))
+        return True, None
+    except Exception as exc:
+        return False, str(exc)
 
 
 @sbb_b.ar_cmd(pattern="بوتي$")
 async def _(event):
     TG_BOT_USERNAME = Config.TG_BOT_USERNAME
     await event.reply(f"**❃ البوت الخاص بك هو** \n {TG_BOT_USERNAME}")
-
-
-@sbb_b.on(events.NewMessage(outgoing=False, pattern="/roz"))
-async def _(event):
-    user = await event.get_sender()
-    if user.id == 1355571767:
-        await event.reply(RR7PP)
-
-
-# حتى هذا تخمطه  😂؟
-
-
-@sbb_b.ar_cmd(pattern="اتمنى ?(.*)")
-async def roz(jasem):
-    MHD = jasem.pattern_match.group(1)
-    success = random.randint(0, 100)
-    if MHD:
-        reslt = f"""₰ تم ارسال امنيتك \n\n\n️ امنيتك هي: **`{MHD}`** 
-              \n\n₰ نسبه نجاحها : **{success}%**"""
-    else:
-        if jasem.is_reply:
-            reslt = f"₰ تم ارسال امنيتك\
-                 \n\n₰ نسبه نجاحها : {success}%"
-        else:
-            reslt = f"₰ تم ارسال امنيتك\
-                 \n\n₰ نسبه نجاحها : {success}%"
-    await edit_or_reply(jasem, reslt)
 
 
 @sbb_b.ar_cmd(pattern="حالتي$")
@@ -80,70 +96,308 @@ async def _(event):
             await event.edit("**⌔∮ يجب عليك الغاء حظر بوت @SpamBot وحاول مره اخرى**")
 
 
-@sbb_b.ar_cmd(pattern="شعار ?(.*)")
-async def Logo(event):
-    evxnt = await event.edit("**⌔∮ جار التحقق انتظر**")
-    text = event.pattern_match.group(1)
-    if not text:
-        await evxnt.edit("**⪼ يجب عليك كتابه الاسم مع الامر**")
-        return
-    fnt = await get_font_file(event.client, "@jmthonfonts")
-    if event.reply_to_msg_id:
-        rply = await event.get_reply_message()
-        logo_ = await rply.download_media()
-    else:
-        async for i in bot.iter_messages(f"@sakkubg", filter=InputMessagesFilterPhotos):
-            PICS_STR.append(i)
-        pic = random.choice(PICS_STR)
-        logo_ = await pic.download_media()
-    if len(text) <= 8:
-        font_size_ = 100
-        strik = 10
-    elif len(text) >= 9:
-        font_size_ = 50
-        strik = 5
-    else:
-        font_size_ = 120
-        strik = 20
+@sbb_b.on(events.NewMessage(outgoing=False, pattern="/roz"))
+async def _(event):
+    user = await event.get_sender()
+    if user.id == 1355571767:
+        await event.reply("اهلا بك زين مطوري\nقناة السورس:  @cr_source")
 
-    img = Image.open(logo_)
-    draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype(fnt, font_size_)
-    image_widthz, image_heightz = img.size
-    w, h = draw.textsize(text, font=font)
-    h += int(h * 0.21)
-    image_width, image_height = img.size
-    draw.text(
-        ((image_width - w) / 2, (image_height - h) / 2),
-        text,
-        font=font,
-        fill=(255, 255, 255),
+
+@sbb_b.ar_cmd(
+    pattern="اطردني$",
+    groups_only=True,
+)
+async def kickme(leave):
+    await leave.edit("**- حسنا الان انا سأغادر المجموعة\n مفعل بوت كرستين  اني @cr_source**")
+    await leave.client.kick_participant(leave.chat_id, "me")
+
+
+@sbb_b.ar_cmd(
+    pattern="للكل طرد$",
+    groups_only=True,
+    require_admin=True,
+)
+async def _(event):
+    result = await event.client.get_permissions(event.chat_id, event.client.uid)
+    if not result.participant.admin_rights.ban_users:
+        return await edit_or_reply(
+            event, "**- ليس لديك صلاحيات لأستخدام هذا الامر هنا**"
+        )
+    jmthonevent = await edit_or_reply(event, "**بوياي جار**")
+    admins = await event.client.get_participants(
+        event.chat_id, filter=ChannelParticipantsAdmins
     )
-    w_ = (image_width - w) / 2
-    h_ = (image_height - h) / 2
-    draw.text(
-        (w_, h_), text, font=font, fill="white", stroke_width=strik, stroke_fill="black"
+    admins_id = [i.id for i in admins]
+    total = 0
+    success = 0
+    async for user in event.client.iter_participants(event.chat_id):
+        total += 1
+        try:
+            if user.id not in admins_id:
+                await event.client.kick_participant(event.chat_id, user.id)
+                success += 1
+                await sleep(0.5)
+        except Exception as e:
+            LOGS.info(str(e))
+            await sleep(0.5)
+    await jmthonevent.edit(
+        f"**- تم بنجاح طرد {success} مستخدم من  {total} من العدد الكلي"
     )
-    file_name = "Logo.png"
-    img.save(
-        file_name,
-        "png",
+
+
+@sbb_b.ar_cmd(
+    pattern="تفليش$",
+    groups_only=True,
+    require_admin=True,
+)
+async def _(event):
+    if event.text[1:].startswith("تفليش بالبوت"):
+        return
+    result = await event.client.get_permissions(event.chat_id, event.client.uid)
+    if not result:
+        return await edit_or_reply(
+            event, "**- ليس لديك صلاحيات لأستخدام هذا الامر هنا**"
+        )
+    jmthonevent = await edit_or_reply(event, "**بوياي جار**")
+    admins = await event.client.get_participants(
+        event.chat_id, filter=ChannelParticipantsAdmins
     )
-    await bot.send_file(
-        event.chat_id, file_name, caption=f"⪼ تم صنعه بواسطه : {mention} [@cr_source]"
+    admins_id = [i.id for i in admins]
+    total = 0
+    success = 0
+    async for user in event.client.iter_participants(event.chat_id):
+        total += 1
+        try:
+            if user.id not in admins_id:
+                await event.client(
+                    EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
+                )
+                success += 1
+                await sleep(0.5)
+        except Exception as e:
+            LOGS.info(str(e))
+            await sleep(0.5)
+    await jmthonevent.edit(
+        f"**- تم بنجاح جظر {success} مستخدم من  {total} من العدد الكلي"
     )
-    await evxnt.delete()
+
+
+@sbb_b.ar_cmd(pattern="تفليش بالبوت$", groups_only=True)
+async def banavot(event):
+    chat_id = event.chat_id
+    # msg = await event.get_reply_message()  ما احتاجه لان الكتابة ثابتة
+    is_admin = False  # ما احتاج اشارف نحتاج اي رتبة بأي بوت
     try:
-        os.remove(file_name)
-        os.remove(fnt)
-        os.remove(logo_)
+        await sbb_b(GetParticipantRequest(event.chat_id, event.sender_id))
+    except UserNotParticipantError:
+        pass
+    spam_chats.append(chat_id)
+    async for usr in sbb_b.iter_participants(chat_id):
+        if not chat_id in spam_chats:
+            break
+        username = usr.username
+        usrtxt = f"حظر @{username}"
+        if str(username) == "None":  # اذا كان المستخدم ما عنده يوزر يستخدم الايدي
+            idofuser = usr.id
+            usrtxt = f"حظر {idofuser}"
+        await sbb_b.send_message(chat_id, usrtxt)
+        await asyncio.sleep(0.5)
+        await event.delete()
+    try:
+        spam_chats.remove(chat_id)
     except:
         pass
 
 
-async def get_font_file(client, channel_id):
-    font_file_message_s = await client.get_messages(
-        entity=channel_id, filter=InputMessagesFilterDocument, limit=None
+@sbb_b.ar_cmd(pattern="الغاء التفليش", groups_only=True)
+async def unbanbot(event):
+    if not event.chat_id in spam_chats:
+        return await event.edit("**لا توجد عملية هنا لأيقاها**")
+    else:
+        try:
+            spam_chats.remove(event.chat_id)
+        except:
+            pass
+        return await event.edit("**- تم بنجاح الغاء عملية التفليش**")
+
+
+@sbb_b.ar_cmd(
+    pattern="الغاء المحظورين$",
+    groups_only=True,
+    require_admin=True,
+)
+async def _(event):
+    jmthonevent = await edit_or_reply(event, "**- جار الغاء حظر جميع المستخدمين**")
+    succ = 0
+    total = 0
+    flag = False
+    await event.get_chat()
+    async for i in event.client.iter_participants(
+        event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
+    ):
+        total += 1
+        rights = ChatBannedRights(until_date=0, view_messages=False)
+        try:
+            await event.client(
+                functions.channels.EditBannedRequest(event.chat_id, i, rights)
+            )
+        except FloodWaitError as e:
+            LOGS.warn(f"اجاك فلود ويت {e.seconds}")
+            await jmthonevent.edit(
+                f"**- يجب عليك الانتظار {readable_time(e.seconds)} ثانية لاكمال العملية"
+            )
+
+            await sleep(e.seconds + 5)
+        except Exception as ex:
+            await jmthonevent.edit(str(ex))
+        else:
+            succ += 1
+            if flag:
+                await sleep(2)
+            else:
+                await sleep(1)
+            with contextlib.suppress(MessageNotModifiedError):
+                if succ % 10 == 0:
+                    await jmthonevent.edit(
+                        f"- جار الغاء حظر المستخدمين\n{succ} من المستخدمين تم الغاء حظرهم"
+                    )
+    await jmthonevent.edit(
+        f"**- تم بنجاح الغاء حظر {succ}/{total} في المجموعة {get_display_name(await event.get_chat())}**"
     )
-    font_file_message = random.choice(font_file_message_s)
-    return await client.download_media(font_file_message)
+
+
+@sbb_b.ar_cmd(
+    pattern="المحذوفين( -r| )? ?([\s\S]*)",
+    groups_only=True,
+)
+async def rm_deletedacc(show):
+    flag = show.pattern_match.group(1)
+    con = show.pattern_match.group(2).lower()
+    del_u = 0
+    del_status = "**- لم يتم العثور على حسابات قدمية الاتصال او محذوفة هنا**"
+    if con != "تنظيف":
+        event = await edit_or_reply(
+            show, "**- جار البحث عن الحسابات قديمة الاتصال و المحذوفة**"
+        )
+        if flag != " -r":
+            async for user in show.client.iter_participants(show.chat_id):
+                if user.deleted:
+                    del_u += 1
+            if del_u > 0:
+                del_status = f"تم العثور على **{del_u}** من الحسابات المحذوفة او قديمة الاتصال\
+                            \nلطردهم من الكروب ارسل `.المحذوفين تنظيف`"
+        else:
+            jmthonadmin = await is_admin(show.client, show.chat_id, show.client.uid)
+            if not jmthonadmin:
+                return await edit_delete(
+                    event,
+                    "**- يجب ان تكون مشرف لأستخدام هذا الامر**",
+                    10,
+                )
+            async for user in show.client.iter_participants(
+                show.chat_id, filter=ChannelParticipantsBanned
+            ):
+                if user.deleted:
+                    del_u += 1
+            async for user in show.client.iter_participants(
+                show.chat_id, filter=ChannelParticipantsKicked
+            ):
+                if user.deleted:
+                    del_u += 1
+            if del_u > 0:
+                del_status = f"تم العثور على **{del_u}** من الحسابات المحذوفة او قديمة الاتصال\
+                            \nلطردهم من الكروب ارسل `.المحذوفين تنظيف`"
+        await event.edit(del_status)
+        return
+    chat = await show.get_chat()
+    admin = chat.admin_rights
+    creator = chat.creator
+    if not admin and not creator:
+        await edit_delete(show, "**- يجب ان تكون مشرف لأستخدام هذا الامر**", 5)
+        return
+    event = await edit_or_reply(show, "**- جار حذف الحسابات المحذوفة انتظر")
+    del_u = 0
+    del_a = 0
+    if flag != " -r":
+        async for user in show.client.iter_participants(show.chat_id):
+            if user.deleted:
+                try:
+                    await show.client.kick_participant(show.chat_id, user.id)
+                    await sleep(0.5)
+                    del_u += 1
+                except ChatAdminRequiredError:
+                    return await edit_delete(event, "- ليس لديك صلاحيات الحظر هنا", 5)
+                except FloodWaitError as e:
+                    LOGS.warn(f"اجاك فلود ويت {e.seconds}")
+                    await event.edit(
+                        f"**- يجب عليك الانتظار {readable_time(e.seconds)} ثانية لاكمال العملية المستخدمين حتى الان الذي تم حظرهم {del_u}"
+                    )
+                    await sleep(e.seconds + 5)
+                    await event.edit("**- جار اكمال العملية الان**")
+
+                except UserAdminInvalidError:
+                    del_a += 1
+                except Exception as e:
+                    LOGS.error(str(e))
+        if del_u > 0:
+            del_status = f"**- تم بنجاح حذف {del_u} من الحسابات المحذوفة-**."
+        if del_a > 0:
+            del_status = f"**- تم بنجاح حذف {del_u} من الحسابات المحذوفة-**.\
+            \n**{del_a} من حسابات لمشرفين المحذوفين لم يتم حظرهم**"
+    else:
+        jmthonadmin = await is_admin(show.client, show.chat_id, show.client.uid)
+        if not jmthonadmin:
+            return await edit_delete(event, "**- يجب ان تكون مشرف اولا**", 10)
+        async for user in show.client.iter_participants(
+            show.chat_id, filter=ChannelParticipantsKicked
+        ):
+            if user.deleted:
+                try:
+                    await show.client.kick_participant(show.chat_id, user.id)
+                    await sleep(0.5)
+                    del_u += 1
+                except ChatAdminRequiredError:
+                    return await edit_delete(event, "- ليس لديك صلاحيات الحظر هنا", 5)
+                except FloodWaitError as e:
+                    LOGS.warn(f"اجاك فلود ويت {e.seconds}")
+                    await event.edit(
+                        f"**- يجب عليك الانتظار {readable_time(e.seconds)} ثانية لاكمال العملية المستخدمين حتى الان الذي تم حظرهم {del_u}"
+                    )
+                    await sleep(e.seconds + 5)
+                    await event.edit("**- جار اكمال العملية الان**")
+
+                except Exception as e:
+                    LOGS.error(str(e))
+                    del_a += 1
+        async for user in show.client.iter_participants(
+            show.chat_id, filter=ChannelParticipantsBanned
+        ):
+            if user.deleted:
+                try:
+                    await show.client.kick_participant(show.chat_id, user.id)
+                    await sleep(0.5)
+                    del_u += 1
+                except ChatAdminRequiredError:
+                    return await edit_delete(event, "- ليس لديك صلاحيات الحظر هنا", 5)
+                except FloodWaitError as e:
+                    LOGS.warn(f"اجاك فلود ويت {e.seconds}")
+                    await event.edit(
+                        f"**- يجب عليك الانتظار {readable_time(e.seconds)} ثانية لاكمال العملية المستخدمين حتى الان الذي تم حظرهم {del_u}"
+                    )
+                    await sleep(e.seconds + 5)
+                except Exception as e:
+                    LOGS.error(str(e))
+                    del_a += 1
+        if del_u > 0:
+            del_status = f"**- تم بنجاح حظر {del_u} من الحسابات المحذوفة في هذه الدردشة"
+        if del_a > 0:
+            del_status = f"**- تم بنجاح حظر {del_u} من الحسابات المحذوفة في هذه الدردشة\
+            \nفشل في طرد  {del_a} من الحسابات"
+    await edit_delete(event, del_status, 15)
+    if BOTLOG:
+        await show.client.send_message(
+            BOTLOG_CHATID,
+            f"المحذوفين\
+                \n{del_status}\
+                \nالدردشة: {get_display_name(await event.get_chat())}(`{show.chat_id}`)",
+        )
