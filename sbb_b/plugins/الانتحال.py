@@ -17,10 +17,7 @@ from sbb_b.plugins import (
 from sbb_b.sql_helper.globals import gvarstatus
 plugin_category = "utils"
 DEFAULTUSER = gvarstatus("FIRST_NAME") or ALIVE_NAME
-DEFAULTUSERBIO = (
-    str(DEFAULT_BIO)
-    if DEFAULT_BIO
-    else "الحمد لله دائماً وابداً 🎀 𝑆𝐻 : @cr_source"
+DEFAULTUSERBIO = Config.DEFAULT_BIO 
 
 
 @sbb_b.ar_cmd(pattern="انتحال(?:\s|$)([\s\S]*)")
