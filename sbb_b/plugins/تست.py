@@ -119,35 +119,13 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
             remwarns=remwarns,
         )
     elif gvarstatus("pmmenu") is None:
-        USER_BOT_NO_WARN = f"""𓆩𝑪.𝑹 𝑺𝑶𝑼𝑹𝑪𝑬 ♤𝑷𝑴 𝑺𝑬𝑪𝑼𝑹𝑰𝑻𝒀𓆪\n◐━─━ς.ᖇ━─━◐\n\n❞ هها هلو ❝\n\n ⤶ انا مشغـول حـالياً لا تقـم بازعـاجي وارسـال رسـائل كثيـره والا سـوف يتم حظـرك تلقـائياً....."
+     USER_BOT_NO_WARN = f"""𓆩𝑪.𝑹 𝑺𝑶𝑼𝑹𝑪𝑬 ♤𝑷𝑴 𝑺𝑬𝑪𝑼𝑹𝑰𝑻𝒀𓆪\n◐━─━ς.ᖇ━─━◐\n\n❞ هها هلو  {mention} ❝\n\n ⤶ انا مشغـول حـالياً لا تقـم بازعـاجي وارسـال رسـائل كثيـره والا سـوف يتم حظـرك تلقـائياً....."
                     f"فقط قل سبب مجيئك وانتظـر حتى اعـود لكـي تتـم الموافقـه عليك.\
-                                    """
-          buttons = [
-        (Button.inline(text="التحذيرات", data="{warns}/{totalwarns}"),),
-        (Button.inline(text="حسابك", data="{mention}"),),
-        (Button.inline(text="السورس", data="https://t.me/cr_source"),),
-        (
-            Button.inline(
-                text="المطور",
-                data="https://t.me/iiqllll",
-            ),
-        ),
-    ]                          
+                                    \n\n ⤶ ❨ عندك {warns}/{totalwarns} تحذيرات ❩"""
     else:
-        USER_BOT_NO_WARN = f"""𓆩𝑪.𝑹 𝑺𝑶𝑼𝑹𝑪𝑬 ♤𝑷𝑴 𝑺𝑬𝑪𝑼𝑹𝑰𝑻𝒀𓆪\n◐━─━ς.ᖇ━─━◐\n\n❞ هها هلو ❝\n\n ⤶ انا مشغـول حـالياً لا تقـم بازعـاجي وارسـال رسـائل كثيـره والا سـوف يتم حظـرك تلقـائياً....."
+        USER_BOT_NO_WARN = f"""𓆩𝑪.𝑹 𝑺𝑶𝑼𝑹𝑪𝑬 ♤𝑷𝑴 𝑺𝑬𝑪𝑼𝑹𝑰𝑻𝒀𓆪\n◐━─━ς.ᖇ━─━◐\n\n❞ هها هلو  {mention} ❝\n\n ⤶ انا مشغـول حـالياً لا تقـم بازعـاجي وارسـال رسـائل كثيـره والا سـوف يتم حظـرك تلقـائياً....."
                     f"فقط قل سبب مجيئك وانتظـر حتى اعـود لكـي تتـم الموافقـه عليك.\
-                                    """
-          buttons = [
-        (Button.inline(text="التحذيرات", data="{warns}/{totalwarns}"),),
-        (Button.inline(text="حسابك", data="{mention}"),),
-        (Button.inline(text="السورس", data="https://t.me/cr_source"),),
-        (
-            Button.inline(
-                text="المطور",
-                data="https://t.me/iiqllll",
-            ),
-        ),
-    ]                          
+                                    \n\n ⤶ ❨ عندك {warns}/{totalwarns} تحذيرات ❩ """                   
     addgvar("pmpermit_text", USER_BOT_NO_WARN)
     PM_WARNS[str(chat.id)] += 1
     try:
