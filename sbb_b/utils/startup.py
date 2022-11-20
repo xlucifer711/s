@@ -25,7 +25,7 @@ from .pluginmanager import load_module
 from .tools import create_supergroup
 
 ENV = bool(os.environ.get("ENV", False))
-LOGS = logging.getLogger("اعداد كرستين")
+LOGS = logging.getLogger("اعداد بوت كرستين")
 cmdhr = Config.COMMAND_HAND_LER
 
 if ENV:
@@ -70,25 +70,29 @@ async def saves():
     except Exception as e:
         print(str(e))
     try:
-        await sbb_b(JoinChannelRequest("@cr_source"))
+        await sbb_b(JoinChannelRequest("@gro_up_1"))
     except BotMethodInvalidError:
         pass
     except ChannelsTooMuchError:
-        LOGS.info("انضم بقناة سورس كرستين اولا @cr_source")
+        LOGS.info("انضم بجروب كرستين اولا @gro_up_1")
     except ChannelPrivateError:
         LOGS.critical(
-            "تم حظرك من استخدام سورس كرستين عليك الأعتذار الى مطور السورس @wjj_u"
+            "تم حظرك من استخدام سورس كرستين عليك الأعتذار الى مطور السورس @iiqllll"
         )
     try:
-        await sbb_b(JoinChannelRequest("@wjj_u"))
+        await sbb_b(JoinChannelRequest("@iiqllll"))
     except BaseException:
         pass
     try:
-        await sbb_b(JoinChannelRequest("@gro_up_1"))
+        await sbb_b(JoinChannelRequest("@cr_source"))
     except BaseException:
         pass
     try:
         await sbb_b(JoinChannelRequest("@pp_g3"))
+    except BaseException:
+        pass
+    try:
+        await sbb_b(JoinChannelRequest("@sors0coo"))
     except BaseException:
         pass
 
@@ -99,7 +103,7 @@ async def mybot():
     f"ـ {rz_ment}"
     f"⪼ هذا هو بوت خاص بـ {rz_ment} يمكنك التواصل معه هنا"
     starkbot = await sbb_b.tgbot.get_me()
-    perf = "[ بوت سورس كرستين ]"
+    perf = "[ بوت كرستين ]"
     bot_name = starkbot.first_name
     botname = f"@{starkbot.username}"
     if bot_name.endswith("Assistant"):
@@ -124,7 +128,7 @@ async def startupmessage():
         if BOTLOG:
             Config.JMTHONLOGO = await sbb_b.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/3efab271df61d1370f7c1.mp4",
+                "https://telegra.ph/file/c294d08e8340ef77b09e2.mp4",
                 caption="**تم تشغيل سورس كرستين بنجاح لعرض الاوامر ارسل .الاوامر**",
                 buttons=[(Button.url("كروب المساعدة", "https://t.me/gro_up_1"),)],
             )
@@ -269,7 +273,7 @@ async def verifyLoggerGroup():
         descript = "⪼ هذه هي مجموعه الحفظ الخاصه بك لا تحذفها ابدا  𓆰."
         photobt = await sbb_b.upload_file(file="razan/pic/crsource.jpg")
         _, groupid = await create_supergroup(
-            "كروب بوت كرستين", sbb_b, Config.TG_BOT_USERNAME, descript, photobt
+            "جروب بوت كرستين", sbb_b, Config.TG_BOT_USERNAME, descript, photobt
         )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print("تم انشاء كروب الحفظ بنجاح")
