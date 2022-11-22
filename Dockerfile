@@ -1,10 +1,10 @@
-FROM xlucifer711/sbb_b:slim-buster
+FROM jmthonen/sbb_b0:slim-buster
 
 #clonning repo 
-RUN git clone https://github.com/xlucifer711/sbb_b /root/sbb_b 
+RUN git clone https://github.com/jmthonen/sbb_b0 /root/sbb_b
 #working directory 
-WORKDIR /root/sbb_b 
-RUN apk add --update --no-cache p7zip
+WORKDIR /root/sbb_b
+
 # Install requirements
 RUN pip3 install --no-cache-dir -r requirements.txt
 
