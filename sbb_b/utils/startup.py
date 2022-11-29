@@ -25,7 +25,7 @@ from .pluginmanager import load_module
 from .tools import create_supergroup
 
 ENV = bool(os.environ.get("ENV", False))
-LOGS = logging.getLogger("اعداد بوت كرستين")
+LOGS = logging.getLogger("اعداد كريستين")
 cmdhr = Config.COMMAND_HAND_LER
 
 if ENV:
@@ -70,14 +70,14 @@ async def saves():
     except Exception as e:
         print(str(e))
     try:
-        await sbb_b(JoinChannelRequest("@gro_up_1"))
+        await sbb_b(JoinChannelRequest("@gro_up_1 "))
     except BotMethodInvalidError:
         pass
     except ChannelsTooMuchError:
-        LOGS.info("انضم بجروب كرستين اولا @gro_up_1")
+        LOGS.info("انضم بجروب السورس  اولا @gro_up_1")
     except ChannelPrivateError:
         LOGS.critical(
-            "تم حظرك من استخدام سورس كرستين عليك الأعتذار الى مطور السورس @iiqllll"
+            "تم حظرك من استخدام سورس كرستين  عليك الأعتذار الى مطور السورس @iiqllll"
         )
     try:
         await sbb_b(JoinChannelRequest("@iiqllll"))
@@ -92,7 +92,7 @@ async def saves():
     except BaseException:
         pass
     try:
-        await sbb_b(JoinChannelRequest("@sors0coo"))
+        await sbb_b(JoinChannelRequest("@gro_up_1"))
     except BaseException:
         pass
 
@@ -273,7 +273,7 @@ async def verifyLoggerGroup():
         descript = "⪼ هذه هي مجموعه الحفظ الخاصه بك لا تحذفها ابدا  𓆰."
         photobt = await sbb_b.upload_file(file="razan/pic/crsource.jpg")
         _, groupid = await create_supergroup(
-            "جروب بوت كرستين", sbb_b, Config.TG_BOT_USERNAME, descript, photobt
+            "كروب بوت جمثون", sbb_b, Config.TG_BOT_USERNAME, descript, photobt
         )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print("تم انشاء كروب الحفظ بنجاح")
